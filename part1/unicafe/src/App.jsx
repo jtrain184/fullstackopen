@@ -12,12 +12,16 @@ const Statistics = (props) => {
   return (
     <div>
       <h1>statistics</h1>
-      <StatisticLine text="good" value ={props.good} />
-      <StatisticLine text="neutral" value ={props.neutral} />
-      <StatisticLine text="bad" value ={props.bad} />
-      <StatisticLine text="all" value ={props.total} />
-      <StatisticLine text="average" value ={((props.good * 1 + props.bad * -1) / props.total).toFixed(2)} />
-      <StatisticLine text="positive" value ={`${((props.good / props.total)*100).toFixed(2)} %`}/>
+      <table>
+        <tbody>
+          <StatisticLine text="good" value ={props.good} />
+          <StatisticLine text="neutral" value ={props.neutral} />
+          <StatisticLine text="bad" value ={props.bad} />
+          <StatisticLine text="all" value ={props.total} />
+          <StatisticLine text="average" value ={((props.good * 1 + props.bad * -1) / props.total).toFixed(2)} />
+          <StatisticLine text="positive" value ={`${((props.good / props.total)*100).toFixed(2)} %`}/>
+        </tbody>
+      </table>
     </div>
   )
 }
@@ -27,7 +31,10 @@ const Button = (props) => (
 )
 
 const StatisticLine = (props) => (
-  <p>{props.text} {props.value}</p>
+  <tr>
+    <td>{props.text}</td> 
+    <td>{props.value}</td>
+  </tr>
 )
 const App = () => {
   // save clicks of each button to its own state
