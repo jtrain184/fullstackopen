@@ -12,8 +12,10 @@ const App = () => {
     'The only way to go fast, is to go well.'
   ]
   const [selected, setSelected] = useState(0)
-
+  const [votes, setVotes] =useState(Array(anecdotes.length).fill(0))
+  console.log(votes);
   const generateRandomNumber = () => {
+  
     // Generate a random integer between a min and max (e.g., 1 to 100)
     const min = 0;
     const max = anecdotes.length - 1;
@@ -21,14 +23,34 @@ const App = () => {
     console.log(newNumber);
     setSelected(newNumber); // Update the state with the new random number
   };
+    
+    const addVote = () => {
+      const copy = [...votes];
+      copy[selected]+=1;
+      setVotes(copy);
+  };
 
+    const findTopVote = () => {
+      const maxValue = Math.max(...votes);
+      return votes.indexOf(maxValue);
+    }
+
+ const topVoteIndex = findTopVote();
   return (
     <div>
       <p>{anecdotes[selected]}</p>
-      <p><button onClick={() => generateRandomNumber()}>
-        next anectdote
-      </button>
+      <p>has {votes[selected]} votes</p>
+      <p>
+        <button onClick={() => generateRandomNumber()}>
+          next anectdote
+        </button>
+        <button onClick={() => addVote()}>
+          vote
+        </button>
       </p>
+      <h1>The anecdoe with the most votes is:</h1>
+      <p> {anecdotes[topVoteIndex]} </p>
+      <p> with {votes[topVoteIndex]} </p>
     </div>
   )
 }
